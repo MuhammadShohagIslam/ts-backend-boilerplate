@@ -1,15 +1,16 @@
 import mongoose from 'mongoose'
+import { errorLogger, logger } from '../shared/logger'
 
 export const database_connection = async (uri: string) => {
   try {
     if (!uri) {
-      console.log('mongo uri is not find!')
+      errorLogger.info('mongo uri is not find!')
     }
     await mongoose.connect(uri)
-    console.log('mongodb database is running!')
+    logger.info('mongodb database is running!')
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message)
+      errorLogger.error(error.message)
     }
   }
 }

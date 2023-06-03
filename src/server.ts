@@ -1,6 +1,7 @@
 import config from './config'
 import app from './app'
 import { database_connection } from './db/mongo.db'
+import { errorLogger, logger } from './shared/logger'
 
 const startServer = async () => {
   try {
@@ -9,11 +10,11 @@ const startServer = async () => {
 
     // server listening
     app.listen(config.port, () => {
-      console.log(`Application Running on ${config.port}`)
+      logger.info(`Application Running on ${config.port}`)
     })
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message)
+      errorLogger.error(error.message)
     }
   }
 }
